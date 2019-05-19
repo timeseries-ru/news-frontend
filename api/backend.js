@@ -16,4 +16,13 @@ export default class DataLoader {
       return response.data
     }
   }
+
+  async getPosts (page) {
+    if (this.useFakes) {
+      return require('./fake_posts.json')
+    } else {
+      const response = await this.axios.get(endpoint + '/posts')
+      return response.data
+    }
+  }
 }

@@ -1,5 +1,5 @@
 <template>
-  <v-card class="ma-2 pa-2">
+  <v-card class="ma-2 pa-2 elevation-8">
     <vue-markdown :source="about"></vue-markdown>
   </v-card>
 </template>

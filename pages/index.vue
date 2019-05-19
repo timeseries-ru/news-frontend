@@ -3,7 +3,7 @@
     <v-layout row wrap>
       <template v-for="(widget, index) in widgets">
         <v-flex :key="index" v-bind:class="widget.width">
-          <v-card class="mb-4 mx-2 pa-1" :style="rendered ? 'display: block' : 'display: none'">
+          <v-card class="mb-4 mx-2 pa-1 elevation-8" :style="rendered ? 'display: block' : 'display: none'">
             <div ref="views" style="overflow: hidden;"></div>
           </v-card>
         </v-flex>
