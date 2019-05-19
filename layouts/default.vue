@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-toolbar fixed app>
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-toolbar-title v-text="title" style="cursor: pointer" @click="home"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-text-field
         placeholder="Поиск" append-icon="search" @keyup.enter="search" v-model="term"
@@ -19,6 +19,7 @@
       </v-btn>
       <v-btn
         icon
+        :disabled="!dashboard"
         @click="toggleSidebar()"
       >
         <v-icon>settings</v-icon>
@@ -50,7 +51,8 @@
     data () {
       return {
         term: '',
-        title: 'News Insights'
+        title: 'News Insights',
+        path: ''
       }
     },
     computed: {
@@ -61,9 +63,15 @@
         set (value) {
           this.setSidebar(value)
         }
+      },
+      dashboard () {
+        return this.path === '/'
       }
     },
     methods: {
+      home () {
+        this.$router.push('/')
+      },
       search () {
         this.$router.push('/search/' + this.term)
         this.term = ''
@@ -72,6 +80,11 @@
         toggleSidebar: 'toggleSidebar',
         setSidebar: 'setSidebar'
       })
+    },
+    watch: {
+      $route () {
+        this.path = this.$router.currentRoute.fullPath
+      }
     }
   }
 </script>
