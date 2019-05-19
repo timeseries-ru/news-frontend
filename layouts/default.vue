@@ -41,6 +41,15 @@
       fixed
       width="450"
     >
+      <template v-for="control in $store.state.controls">
+        <div v-if="control.type === 'date'" class="mb-2 mx-1 pa-1">
+          <v-subheader>{{control.text}}</v-subheader>
+          <v-date-picker full-width></v-date-picker>
+        </div>
+      </template>
+      <div class="mx-2 my-4">
+        <v-btn block color="primary" @click="filter">Применить</v-btn>
+      </div>
     </v-navigation-drawer>
   </v-app>
 </template>
@@ -52,7 +61,7 @@
       return {
         term: '',
         title: 'News Insights',
-        path: ''
+        path: this.$router.currentRoute.fullPath
       }
     },
     computed: {
@@ -79,7 +88,10 @@
       ...mapMutations({
         toggleSidebar: 'toggleSidebar',
         setSidebar: 'setSidebar'
-      })
+      }),
+      filter () {
+        this.sidebar = false
+      }
     },
     watch: {
       $route () {
