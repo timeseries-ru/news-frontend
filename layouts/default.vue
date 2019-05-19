@@ -29,9 +29,6 @@
       <v-container>
         <nuxt />
       </v-container>
-      <v-footer>
-        <span>&copy; {{ new Date().getFullYear() }}</span>
-      </v-footer>
     </v-content>
     <v-navigation-drawer
       temporary
@@ -51,6 +48,9 @@
         <v-btn block color="primary" @click="filter">Применить</v-btn>
       </div>
     </v-navigation-drawer>
+    <v-footer class="pa-2">
+      <span>&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
   </v-app>
 </template>
 
