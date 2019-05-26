@@ -3,7 +3,8 @@
     <v-layout row wrap>
       <template v-for="(widget, index) in widgets">
         <v-flex :key="index" v-bind:class="widget.width">
-          <v-card class="mb-4 mx-2 pa-1 elevation-8" :style="rendered ? 'display: block' : 'display: none'">
+          <v-card class="mb-4 mx-2 pa-1 elevation-8 height-initial"
+                 :style="rendered ? 'display: block' : 'display: none'">
             <div ref="views" style="overflow: hidden;"></div>
           </v-card>
         </v-flex>
@@ -18,7 +19,7 @@ const vega = require('vega')
 
 export default {
   async asyncData ({ $axios, store }) {
-    const loader = new DataLoader($axios, true) // true -> use fake data
+    const loader = new DataLoader($axios)
     const layout = await loader.getLayout()
     store.commit('setControls', layout.controls)
     return {
@@ -28,11 +29,36 @@ export default {
   },
   async mounted () {
     for (let index = 0; index < this.widgets.length; ++index) {
-      await new vega.View(vega.parse(this.widgets[index].spec), {
+      const spec = this.widgets[index].spec
+      const wrap = this.$refs.views[index].parentElement
+      let view = await new vega.View({
+        ...vega.parse(spec),
+        height: undefined,
+        autosize: {
+          type: 'fit',
+          contains: 'content',
+          resize: true
+        }
+      }, {
         renderer: 'svg',
         container: this.$refs.views[index],
+        wrapperElem: wrap,
+        responsive: true,
+        widthHeightRatio: spec.width / spec.height,
         hover: true
-      }).runAsync()
+      }).resize()
+
+      const updater = async () => {
+        const margin = 40
+        await view
+          .width(wrap.offsetWidth - margin)
+          .height((wrap.offsetWidth - margin) / spec.width * spec.height)
+          .initialize(wrap)
+          .runAsync('enter')
+      }
+
+      setTimeout(updater, 300)
+      window.addEventListener('resize', updater)
     }
     this.rendered = true
   },
@@ -51,3 +77,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.height-initial {
+  min-height: 100px !important;
+}
+</style>

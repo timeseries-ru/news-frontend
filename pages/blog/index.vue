@@ -11,7 +11,7 @@ export default {
     Posts
   },
   async asyncData ({ $axios }) {
-    const posts = await new DataLoader($axios, true /* fake */).getPosts()
+    const posts = await new DataLoader($axios).getPosts()
     return {
       posts
     }
