@@ -1,4 +1,5 @@
-export default {
+export default [{
+  tabName: 'Первая вкладка',
   controls: [
     {
       'text': 'Дата от',
@@ -37,4 +38,19 @@ export default {
       'spec': require('./fake_spec.json')
     }
   ]
-}
+}, {
+  tabName: 'Вторая вкладка',
+  controls: [
+    {
+      'text': 'Дата от',
+      'type': 'date',
+      'name': 'dateFrom'
+    }
+  ],
+  widgets: [
+    {
+      'width': 'xs12',
+      'spec': require('./fake_spec.json')
+    }
+  ]
+}]

@@ -17,6 +17,7 @@
     "nuxt": "^2.2.0",
     "vega": "^5.4.0",
     "vue-markdown": "^2.2.4",
+    "vuescroll": "^4.13.0-beta",
     "vuetify": "^1.3.6"
   },
   "devDependencies": {

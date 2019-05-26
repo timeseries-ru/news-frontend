@@ -26,9 +26,16 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <div style="height: calc(100vh - 64px)" class="mr-1 mt-1">
+        <vue-scroll>
+          <v-container>
+            <nuxt />
+          </v-container>
+          <v-footer class="pa-2">
+            <span>&copy; {{ new Date().getFullYear() }}</span>
+          </v-footer>
+        </vue-scroll>
+      </div>
     </v-content>
     <v-navigation-drawer
       temporary
@@ -38,24 +45,36 @@
       fixed
       width="450"
     >
-      <template v-for="control in $store.state.controls">
-        <div v-if="control.type === 'date'" class="mb-2 mx-1 pa-1">
-          <v-subheader>{{control.text}}</v-subheader>
-          <v-date-picker full-width></v-date-picker>
+      <vue-scroll>
+        <div class="mr-1">
+          <template v-for="control in $store.state.controls">
+            <div v-if="control.type === 'date'" class="mb-2 mx-1 pa-1">
+              <v-subheader>{{control.text}}</v-subheader>
+              <v-date-picker full-width></v-date-picker>
+            </div>
+          </template>
+          <div class="mx-2 my-4">
+            <v-btn block color="primary" @click="filter">Применить</v-btn>
+          </div>
         </div>
-      </template>
-      <div class="mx-2 my-4">
-        <v-btn block color="primary" @click="filter">Применить</v-btn>
-      </div>
+      </vue-scroll>
     </v-navigation-drawer>
-    <v-footer class="pa-2">
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
 <script>
   import { mapMutations } from 'vuex'
+  import Vue from 'vue'
+  import vuescroll from 'vuescroll'
+  Vue.use(vuescroll, {
+    ops: {
+      bar: {
+        background: 'rgba(0, 0, 0, 0.25)'
+      }
+    },
+    name: 'vue-scroll' // customize component name, default -> vueScroll
+  })
+
   export default {
     data () {
       return {
@@ -100,3 +119,10 @@
     }
   }
 </script>
+
+<style>
+html {
+  overflow: hidden;
+  height: 100vh;
+}
+</style>
