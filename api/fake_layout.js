@@ -66,11 +66,11 @@ export default [{
     },
     {
       'width': 'xs6',
-      'spec': require('./fake_spec.json')
+      'spec': require('./fake_spec_vega_lite.json')
     },
     {
       'width': 'xs6',
-      'spec': require('./fake_spec.json')
+      'spec': require('./fake_spec_vega_lite.json')
     },
     {
       'width': 'xs4',

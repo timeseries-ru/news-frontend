@@ -6,7 +6,7 @@
     <v-tab-item v-for="(tab, index) in layout" :key="index" class="pt-2">
       <v-layout row wrap>
         <template v-for="(widget, index) in tab.widgets">
-          <v-flex :key="index" v-bind:class="widget.width">
+          <v-flex :key="index" :class="widget.width">
             <v-card class="mb-4 mx-2 pa-1 elevation-8 height-initial"
                    :style="rendered ? 'display: block' : 'display: none'">
               <div ref="views" style="overflow: hidden;"></div>
@@ -19,8 +19,9 @@
 </template>
 
 <script>
+import vegaEmbed from 'vega-embed'
+
 import DataLoader from '~/api/backend.js'
-const vega = require('vega')
 
 export default {
   async asyncData ({ $axios, store }) {
@@ -47,25 +48,17 @@ export default {
           ++iterator
         }
         const wrap = this.$refs.views[refIndex].parentElement
-        let view = await new vega.View({
-          ...vega.parse(spec),
-          height: undefined,
-          autosize: {
-            type: 'fit',
-            contains: 'content',
-            resize: true
-          }
-        }, {
+
+        let vegaEmbedObject = await vegaEmbed(wrap, spec, {
           renderer: 'svg',
-          container: this.$refs.views[refIndex],
-          wrapperElem: wrap,
-          responsive: true,
-          widthHeightRatio: spec.width / spec.height,
-          hover: true
-        }).resize()
+          hover: true,
+          tooltip: false
+        })
+
+        let view = vegaEmbedObject.view
 
         const updater = async () => {
-          const margin = 40
+          const margin = 60
           if (wrap) {
             await view
               .width(wrap.offsetWidth - margin)
