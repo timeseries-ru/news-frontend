@@ -31,7 +31,12 @@ export default [{
     },
     {
       'width': 'xs4',
-      'spec': require('./fake_spec.json')
+      'text': `
+1. Я **текст** в *markdown*.
+2. Я **текст** в *markdown*.
+3. Я **текст** в *markdown*.
+4. Я **текст** в *markdown*.
+5. Я **текст** в *markdown*.`
     },
     {
       'width': 'xs4',
