@@ -46,17 +46,7 @@
       width="450"
     >
       <vue-scroll>
-        <div class="mr-1">
-          <template v-for="control in $store.state.controls">
-            <div v-if="control.type === 'date'" class="mb-2 mx-1 pa-1">
-              <v-subheader>{{control.text}}</v-subheader>
-              <v-date-picker full-width></v-date-picker>
-            </div>
-          </template>
-          <div class="mx-2 my-4">
-            <v-btn block color="primary" @click="filter">Применить</v-btn>
-          </div>
-        </div>
+        <Controls :controls="$store.state.controls" />
       </vue-scroll>
     </v-navigation-drawer>
   </v-app>
@@ -66,6 +56,9 @@
   import { mapMutations } from 'vuex'
   import Vue from 'vue'
   import vuescroll from 'vuescroll'
+
+  import Controls from '@/components/controls.vue'
+
   Vue.use(vuescroll, {
     ops: {
       bar: {
@@ -76,6 +69,9 @@
   })
 
   export default {
+    components: {
+      Controls
+    },
     data () {
       return {
         term: '',
