@@ -17,11 +17,20 @@ export default class DataLoader {
     }
   }
 
-  async getPosts (page) {
+  async getPosts () {
     if (useFakes) {
       return require('./fake_posts.json')
     } else {
       const response = await this.axios.get(endpoint + '/posts')
+      return response.data
+    }
+  }
+
+  async getPost (postId) {
+    if (useFakes) {
+      return require('./fake_posts.json').filter(post => post.id === postId)[0]
+    } else {
+      const response = await this.axios.get(endpoint + '/post/' + postId)
       return response.data
     }
   }
