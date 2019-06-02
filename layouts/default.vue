@@ -28,9 +28,9 @@
     <v-content>
       <div style="height: calc(100vh - 64px)" class="mr-1 mt-1">
         <vue-scroll>
-          <v-container>
+          <div class="ma-2">
             <nuxt />
-          </v-container>
+          </div>
           <v-footer class="pa-2">
             <span>&copy; {{ new Date().getFullYear() }}</span>
           </v-footer>

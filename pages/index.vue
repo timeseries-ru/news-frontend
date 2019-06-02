@@ -1,6 +1,6 @@
 <template>
-  <v-tabs v-model="activeTab" @change="tabbed">
-    <v-tab ripple v-for="(tab, index) in layout" :key="index">
+  <v-tabs v-model="activeTab" @change="tabbed" v-bind:class="layout.length < 2 ? 'tabbar-invisible' : ''">
+    <v-tab ripple v-for="(tab, index) in layout" :key="index" v-if="layout.length > 1">
       {{tab.tabName}}
     </v-tab>
     <v-tab-item v-for="(tab, index) in layout" :key="index" class="pt-2">
@@ -96,5 +96,8 @@ export default {
 <style>
 .height-initial {
   min-height: 150px !important;
+}
+.tabbar-invisible > .v-tabs__bar {
+  display: none !important;
 }
 </style>
