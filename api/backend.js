@@ -8,11 +8,13 @@ export default class DataLoader {
     this.axios = axios
   }
 
-  async getLayout () {
+  async getLayout (filters) {
     if (useFakes) {
       return FakeLayout
     } else {
-      const response = await this.axios.get(endpoint + '/layout')
+      const response = await this.axios.get(endpoint + '/layout', {
+        params: filters || {}
+      })
       return response.data
     }
   }
