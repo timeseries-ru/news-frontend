@@ -33,6 +33,7 @@ module.exports = {
   build: {
     extractCSS: true,
     extend (config, ctx) {
+      config.devtool = 'inline-source-map'
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({

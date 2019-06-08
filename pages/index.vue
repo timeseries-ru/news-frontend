@@ -1,6 +1,7 @@
 <template>
   <v-layout>
-    <v-flex xs8 style="overflow: hidden; height: calc(100vh - 100px);">
+    <v-flex v-bind:class="$store.state.controls.length ? 'xs8' : 'xs12'"
+            style="overflow: hidden; height: calc(100vh - 100px);">
       <vue-scroll>
         <v-tabs v-model="activeTab" v-bind:class="layout.length < 2 ? 'tabbar-invisible' : ''">
           <v-tab ripple v-for="(tab, index) in layout" :key="index" v-if="layout.length > 1">
@@ -23,7 +24,7 @@
         </v-tabs>
       </vue-scroll>
     </v-flex>
-    <v-flex xs4 style="overflow: hidden; height: calc(100vh - 100px);">
+    <v-flex xs4 style="overflow: hidden; height: calc(100vh - 100px);" v-if="$store.state.controls.length">
       <vue-scroll>
         <Controls :controls="$store.state.controls" :listener="tune"/>
       </vue-scroll>
@@ -73,9 +74,6 @@ export default {
       this.layout = data.tabs
       this.activeTab = 0
     }
-  },
-  async mounted () {
-    // await this.tabbed()
   }
 }
 </script>
@@ -86,5 +84,8 @@ export default {
 }
 .tabbar-invisible > .v-tabs__bar {
   display: none !important;
+}
+svg {
+  max-width: 100%;
 }
 </style>

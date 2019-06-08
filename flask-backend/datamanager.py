@@ -25,12 +25,10 @@ class DataManager(object):
             self.rubrics_dict = json.load(f)
         with open('src/rubric_topic_words.json', 'r') as f:
             self.rubric_topic_words = json.load(f)
-			
-	def reformat_result(self, chart):
-				
-		result = [{'tabName' : 'Первая вкладка', 'widgets': [{'width' : 'xs12', 'spec' : chart}]}]
-		
-		return result
+
+    def reformat_result(self, chart):
+        result = [{'tabName' : 'Первая вкладка', 'widgets': [{'width' : 'xs12', 'spec' : chart}]}]
+        return result
 
     def get_initial_data(self, chart):
         """
@@ -51,7 +49,7 @@ class DataManager(object):
         rubric_topics = self.rubric_topic_words['bivs-SSR']
         self.rubric_topics = rubric_topics
         topics_dict = {v: v for v in rubric_topics.keys()}
-		return chart
+        return chart
 
         # return self.get_initial_data(chart)
 
@@ -64,9 +62,6 @@ class DataManager(object):
             chart = self.make_bump_chart()
 
         return chart
-
-
-
 
     def make_bump_chart(self):
         self.plot_df['year'] = pd.to_datetime(self.plot_df['year'].astype(str) + '-01-01')

@@ -1,7 +1,7 @@
 import FakeLayout from './fake_layout.js'
 
-const endpoint = 'http://your-backend.url/json/endpoint'
-const useFakes = true
+const endpoint = 'http://localhost:5000/endpoint'
+const useFakes = false
 
 export default class DataLoader {
   constructor (axios) {

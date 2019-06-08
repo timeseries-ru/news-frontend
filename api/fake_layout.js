@@ -63,11 +63,11 @@ export default {
     widgets: [
       {
         'width': 'xs12',
-        'spec': require('./fake_spec_vega_lite.json')
+        'spec': {}
       },
       {
         'width': 'xs12',
-        'spec': require('./fake_spec_vega_lite.json')
+        'spec': {}
       },
       {
         'width': 'xs12',

@@ -7,7 +7,7 @@
         style="display: none"
         placeholder="Поиск" append-icon="search" @keyup.enter="search" v-model="term"
       ></v-text-field>
-      <v-spacer></v-spacer>
+      <!--v-spacer></v-spacer>
       <v-btn flat
         nuxt to="/blog"
       >
@@ -17,7 +17,7 @@
         nuxt to="/about"
       >
         О проекте
-      </v-btn>
+      </v-btn-->
     </v-toolbar>
     <v-content>
       <nuxt />
