@@ -1,6 +1,6 @@
 import FakeLayout from './fake_layout.js'
 
-const endpoint = 'http://localhost:5000/endpoint'
+const endpoint = 'http://51.15.75.134/endpoint'
 const useFakes = false
 
 export default class DataLoader {
